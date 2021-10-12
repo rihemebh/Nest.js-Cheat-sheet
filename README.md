@@ -75,7 +75,10 @@ Note : we can make a generique uri
 
 ``+`` : 1 ou plus 
 
-``? `` : 0 ou plus 
+``?`` : 0 ou plus 
 
 
 
+## DTO
+
+- It is an object that allows to define how the data is sent via the network.
