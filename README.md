@@ -19,6 +19,11 @@
 - the default module of nest is the root module 
 - modules are annotated with ``@Module(parameters)``
 
+### creation
+```js
+nest g mo ModuleName
+```
+
 ### Parameters : 
 - **Providers** les providers qui seront instanciés par l'injecteur Nest et qui peuvent être partagés au moins sur ce module.
 - **Controllers** l'ensemble des contrôleurs définis dans ce module
@@ -32,7 +37,7 @@ Controller is a class annotated with ``@Controller`` that contains a list of act
 
 ### creation
 ```js
-nest g mo ModuleName
+nest g co controllerName
 ```
 
 ### Annotations 
@@ -45,14 +50,32 @@ nest g mo ModuleName
 ## Routes
 
 A route will identify the uri associated to an action.
+### Params 
 
+```js 
+@Get('uri/:param/:param1?')
+
+```
+
+param 1 : optional
 ### Annotations 
  |name|description|
  |---|---|
- |``@Post`` , ``@Get`` , ``@Delete``,  ``@Put`` , ``@Patch``|Accepts a HTTP request|
- |``@Body`` | retrieve the POST request body |
- |||
+ |``@Post()`` , ``@Get()`` , ``@Delete()``,  ``@Put()`` , ``@Patch()``|Accepts a HTTP request|
+ |``@Body()`` | retrieve the POST request body |
+ |``@Res()``| response |
+ |``@HttpCode(code)``|customize the HTTP code |
+ |``@Header()``||
+ |``@Param(<name>)``|retirive params from the uri|
+ 
+ 
+Note : we can make a generique uri 
 
+@Get('test*') : any uri that begins with test
+
+``+`` : 1 ou plus 
+
+``? `` : 0 ou plus 
 
 
 
