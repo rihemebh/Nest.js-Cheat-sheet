@@ -1,7 +1,14 @@
-# Nest-first-project
+# Nest Cheat Sheet
+
+- [1. Let's start](#1-introduction)
+  - [1.1 Instalation](#11document-purpose)
+  - [1.2 New Project ](#12product-scope)
+  - [1.3 Launch Project](#13intended-audience-and-document-overview)
+
+- [2. Modules](#2overall-description)
+## Let's Start
 
 ### Instalation 
-
     npm i -g @nestjs/cli
 
 ### New Project 
@@ -82,3 +89,15 @@ Note : we can make a generique uri
 ## DTO
 
 - It is an object that allows to define how the data is sent via the network.
+
+## Services 
+
+## Middlewares
+
+## Providers 
+
+## Pipes
+## Filters
+## Interceptors 
+## Configuration Variables
+
