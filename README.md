@@ -1,9 +1,9 @@
 # Nest Cheat Sheet
 
 - [1. Let's start](#lets-start)
-  - [1.1 Installation](#11document-purpose)
-  - [1.2 New Project ](#12product-scope)
-  - [1.3 Launch Project](#13intended-audience-and-document-overview)
+  - [1.1 Installation](#installation)
+  - [1.2 New Project ](#new-project)
+  - [1.3 Launch Project](#launch-project)
 
 - [2. Modules](#2overall-description)
 ## Let's Start
@@ -92,12 +92,33 @@ Note : we can make a generique uri
 
 ## Services 
 
-## Middlewares
 
-## Providers 
 
-## Pipes
+## Providers
+## Request Lifecycle
+
+ A request flows through middleware to guards, then to interceptors, then to pipes and finally back to interceptors on the return path (as the response is generated).
+ 
+<img src="https://github.com/rihemebh/Nest.js-Cheat-sheet/blob/main/lifecycle.png" width="800" height="400" />
+### Middlewares
+
+### Pipes
+
+- Nest calls the pipe just before invoking a method to transfor or evaluate its params
+- 
+We have 2 different types of pipes 
+||Transformation Pipes|Validation Pipes|
+|---|---|---|
+|Explanation| Transform input data to the desired form (e.g., from string to integer)|Evaluate the input data and throw an exception if invalid  |
+|Installation| --|``npm i --save class-validator class-transformer``|
+|Where ?|Add it to the property that we want to pipe (Body , Param , Query ...)|Annotate properties|
+|Activation|auto |Gloabally : ``app.useGlobalPipes(new ValidationPipe({transform: true, whitelist: true}))`` <br/> In a specific route: ``@UsePipes(PipeClass1, PipeClass2,…)``|
+|Example of use |1. with dependecy injection <br/> ``@Param('id', ParseIntPipe)`` <br/>2. with class instantiation ( where we could customize the error message ) <br/>``@Param('id', new ParseIntPipe({errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE})`` <br/>|``@IsNotEmpty({message: “You must specify a title ”})`` <br/> ``@MinLength(20, {message: “La taille de votre $property $value est courte, la taille minimale de $property est $constraint1"})`` <br/> ``title: string;`` <br/>|
+
+
+We have some Built-in pipes exported from the ``@nestjs/common`` package but we can also create our own ones :
+
+### Interceptors 
 ## Filters
-## Interceptors 
 ## Configuration Variables
 
