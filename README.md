@@ -1,14 +1,14 @@
 # Nest Cheat Sheet
 
 - [1. Let's start](#lets-start)
-  - [1.1 Instalation](#11document-purpose)
+  - [1.1 Installation](#11document-purpose)
   - [1.2 New Project ](#12product-scope)
   - [1.3 Launch Project](#13intended-audience-and-document-overview)
 
 - [2. Modules](#2overall-description)
 ## Let's Start
 
-### Instalation 
+### Installation 
     npm i -g @nestjs/cli
 
 ### New Project 
