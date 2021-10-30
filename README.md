@@ -217,11 +217,11 @@ We could also restrict the use of middlewares to specific HTTP functions
 );
   ``` 
 
-|forRoutes(...routes: (string | Type < any > | RouteInfo)[]): MiddlewareConsumer|
+|``forRoutes(...routes: (string | Type <any> | RouteInfo)[]): MiddlewareConsumer``|
 |---|
 
  
-It could be a class or a function 
+A Middleware could be a class or a function 
 - Class : 
     - the should implement ``NestMiddleware`` interface then implement its use function that accepts ``Request`` , ``Response`` and the ``Next`` method.
        ```typescript
@@ -234,13 +234,21 @@ It could be a class or a function
     - 
 
 - Function : create a function that accepts ``Request`` , ``Response`` and the ``Next`` method.
-and you could use all express middlewares like : 
-- [Morgan](https://www.npmjs.com/package/morgan) 
-- [Cors](https://www.npmjs.com/package/cors#enable-cors-for-a-single-route)
-- [Helmet](https://www.npmjs.com/package/helmet)
 
+And you could use all express middlewares like : 
+- [Morgan](https://www.npmjs.com/package/morgan): offers a logging feature on the requests.and it has several log formats that you can configure and
+adapt. 
+  -``app.use(morgan('dev'));``
+- [Helmet](https://www.npmjs.com/package/helmet): secure your requests by adding HTTP headers. 
+  - ``app.use(helmet());``
+- [Cors](https://www.npmjs.com/package/cors#enable-cors-for-a-single-route): allows you to manage permissions to resources from another domain.
+  - ``app.enableCors()`` : this function accepts an optional object where we could specify the origin domain / HTTP methods / allowed headers / optionsSuccessStatus : (200-201..)
+  - Alternatively, enable CORS via the create() method's options object: ``const app = await NestFactory.create(AppModule, { cors: true });`` : only applies to **REST** endpoints
+  
+  
 #### Global Middlewares 
-you can declare the middleware in the use(<middlewarename>) function of main.js
+You can declare the middleware in the ``use(<middlewarename>)``  function of main.js
+ ------------------------------------------
 ### Pipes
 
 - Nest calls the pipe just before invoking a method to transfor or evaluate its params
@@ -264,6 +272,7 @@ We have 2 different types of pipes
 - **OmitType** : allows you to create a new type (a class) by removing a set of fields of an existing class.
 
 - **IntersectionType** :  allows you to create a new type (a class) fr designated fields that exist in two types.
+
 #### Custom pipes
 We have some Built-in pipes exported from the ``@nestjs/common`` package but we can also create our own ones :
 
@@ -283,7 +292,72 @@ return value;
 }
 }
 ```
+ ------------------------------------------
 ### Interceptors 
 ## Filters
+ Filters are used to manage exceptions
+ 
+       NestJs comes with his pwn exception management layer that handles all the HTTP exceptions .
+       - If you don't handle the exception Nest does it for you 
+       - If an exception isn't recognized by this filter a default exception is triggered : the famous "Internal  server error" with the "500 status"
+  HttpException is calss given by nes to gandle al the HTTP exceptions its constructor takes 2 arguments : response and status
+  
+  Example
+ ```typescript
+   throw new HttpException("You couldn't mention an id ", 400);
+ ```
+ All the standars Exceptions are inherited from this class 
+ 
+ ### Custom filters 
+ 
+  - Implement th ``ExceptionFilter`` interface 
+  - Annotate the class with ``@Catch(<exception type>)``
+  - Implement the ``catch(<exception>,ArgumentHost)`` method : ArgumentHost imported from ``@nestjs/common``
+  
+  Example : 
+  ```typescript
+ import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import { Request, Response } from 'express';
+@Catch(HttpException)
+export class CustomFilter implements ExceptionFilter{
+catch(exception: HttpException, host: ArgumentsHost): any {
+  const ctx = host.switchToHttp(); // give the error context like the response , the request ..
+  const response = ctx.getResponse<Response>();
+  const request = ctx.getRequest<Request>();
+  const exceptionResponse = exception.getResponse();
+  
+  response
+  .status(status)
+  .json({
+    message: 'custom response',
+    statusCode: exception.getStatus(),
+    timestamp: new Date().toISOString(),
+    path: request.url,
+  });
+  
+return response;
+}
+  ```
+ 
+- To make this filter global for all requests by 
+
+ 1. Adding it to the list of providers in the main module :
+ ```typescript
+ providers: [
+  {
+    provide: APP_FILTER,
+    useClass: CustomFilter,
+  } ],
+ ```
+  2. Using ``useClobalFilters`` in our app of main.js
+  ```typescript
+  app.useGlobalFilters(new CustomFilter())
+  ```
+  
+  - To attach a filter to a specific method use ``@UseFilter(<filter instance/class>)`` : note that if we don't write any parameter this method will use all filters 
+       
+         Prefer applying filters by using classes instead of instances when possible. 
+         It reduces memory usage since Nest can easily reuse instances of the same class across your entire module.
+  
 ## Configuration Variables
 
