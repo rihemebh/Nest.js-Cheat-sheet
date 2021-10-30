@@ -23,8 +23,8 @@
   - [8.2 Pipes](#pipes)
   - [8.2 Filters](#filters)
   - [8.2 Interceptors](#interceptors)
-  - [8.2 Configuration files](#configuration-files)
-- [8. ORM: Database Acess](#request-lifecycle)
+- [9. Configuration variables](#configuration-variables)
+- [10. ORM: Database Acess](#request-lifecycle)
 
 ## Let's Start
 
@@ -294,6 +294,7 @@ return value;
 ```
  ------------------------------------------
 ### Interceptors 
+// to be added 
 ## Filters
  Filters are used to manage exceptions
  
@@ -360,4 +361,8 @@ return response;
          It reduces memory usage since Nest can easily reuse instances of the same class across your entire module.
   
 ## Configuration Variables
+// to be added 
 
+
+## Database Access 
+// to be added 
