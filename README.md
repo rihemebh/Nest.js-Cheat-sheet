@@ -14,7 +14,7 @@
   - [4.2 Annotations](#annotations)
   - [4.3 Generic URI](#generic-uri)
 - [5. DTO](#dto)
-- [6. Dependency Injection (DI)](#dependency-injection-(di))
+- [6. Dependency Injection (DI)](#dependency-injection-di)
 - [7. Providers](#providers)
   - [7.1 Injection types](#injection)
   - [7.2 Services](#services)
@@ -192,7 +192,55 @@ what we will going to do with this request should be transfered to the business 
 <img src="https://github.com/rihemebh/Nest.js-Cheat-sheet/blob/main/lifecycle.png" width="800" height="400" />
 
 ### Middlewares
+A Middleware is quite simply a function called before the request is processed by the controller
+- Role : 
+   - Execute any code.
+   - Make changes to the request and the response objects.
+   - End the request-response cycle.
+   - Call the next middleware function in the stack
+   - if the current middleware function does not end the request-response cycle, it must call ``next()`` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
+  ------------------------------------------------
+To use middlewares: 
+1. AppModule should implement NestModule
+2.  Implement the ``configure`` method to specify which middleware to use in this app ana for which Route 
+  ```typescript 
+     configure(consumer: MiddlewareConsumer): MiddlewareConsumer | void {
+       consumer.apply(FirstMiddlewar)
+       .forRoutes('courses');
+     }
+```
+We could also restrict the use of middlewares to specific HTTP functions 
+  ```typescript 
+.forRoutes(
+{path: 'courses', method: RequestMethod.GET},
+);
+  ``` 
+
+|forRoutes(...routes: (string | Type < any > | RouteInfo)[]): MiddlewareConsumer|
+|---|
+
+ 
+It could be a class or a function 
+- Class : 
+    - the should implement ``NestMiddleware`` interface then implement its use function that accepts ``Request`` , ``Response`` and the ``Next`` method.
+       ```typescript
+           import { NestMiddleware } from '@nestjs/common';
+           export class FirstMiddlewar implements NestMiddleware{
+           use(req: any, res: any, next: () => void): any {
+            }
+           }
+        ```
+    - 
+
+- Function : create a function that accepts ``Request`` , ``Response`` and the ``Next`` method.
+and you could use all express middlewares like : 
+- [Morgan](https://www.npmjs.com/package/morgan) 
+- [Cors](https://www.npmjs.com/package/cors#enable-cors-for-a-single-route)
+- [Helmet](https://www.npmjs.com/package/helmet)
+
+#### Global Middlewares 
+you can declare the middleware in the use(<middlewarename>) function of main.js
 ### Pipes
 
 - Nest calls the pipe just before invoking a method to transfor or evaluate its params
@@ -220,11 +268,21 @@ We have 2 different types of pipes
 We have some Built-in pipes exported from the ``@nestjs/common`` package but we can also create our own ones :
 
 - A pipe is a class that implements the ``PipeTransform,`` interface. This interface asks you to implement the ``transform()`` method, this method takes the value to be transformed as a parameter and metadata.
-- MetaData : 
-  - type: indicates the type of the argument which can be a body with @Body, a queryParam with @Query, a parameter with @Param.
-  - metatype: indicates the type of the parameter, for example String.
-  - data: the data passed to the decorator
-<
+- MetaData : ``@nestjs/common``
+  - **Type**: indicates the type of the argument which can be a body with ``@Body``, a queryParam with ``@Query``, a parameter with ``@Param``.
+  - **Metatype**: indicates the type of the parameter, for example String.
+  - **Data**: the data passed to the decorator
+
+```typescript 
+import { ArgumentMetadata, PipeTransform } from '@nestjs/common';
+
+export class FusionUpperPipe implements PipeTransform{
+transform(value: any, metadata: ArgumentMetadata): any {
+console.log(metadata);
+return value;
+}
+}
+```
 ### Interceptors 
 ## Filters
 ## Configuration Variables
