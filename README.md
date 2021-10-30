@@ -8,7 +8,7 @@
   - [2.1 Creation](#creation)
   - [2.2 Parameters](#parameters)
 - [3. Controllers](#controllers)
-  - [3.1 Creation](#creation)
+  - [3.1 Creation](#creation-1)
 - [4. Routes](#routes)
   - [4.1 Params](#params)
   - [4.2 Annotations](#annotations)
