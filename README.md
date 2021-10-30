@@ -180,7 +180,7 @@ what we will going to do with this request should be transfered to the business 
      
  -> Encapsulates some functionnality 
  
- -> Reduces redandant code : different controllers could use the same service 
+ -> Reduces redundant code : different controllers could use the same service 
  
  *The service must be provided by the parent module or exported by imported modules.*
 
@@ -255,7 +255,7 @@ You can declare the middleware in the ``use(<middlewarename>)``  function of mai
  ------------------------------------------
 ### Pipes
 
-- Nest calls the pipe just before invoking a method to transfor or evaluate its params
+- Nest calls the pipe just before invoking a method to transform or evaluate its params
 
 We have 2 different types of pipes 
 ||Transformation Pipes|Validation Pipes|
@@ -305,13 +305,13 @@ return value;
        NestJs comes with his pwn exception management layer that handles all the HTTP exceptions .
        - If you don't handle the exception Nest does it for you 
        - If an exception isn't recognized by this filter a default exception is triggered : the famous "Internal  server error" with the "500 status"
-  HttpException is calss given by nes to gandle al the HTTP exceptions its constructor takes 2 arguments : response and status
+  HttpException is calss given by nest to handle all the HTTP exceptions, its constructor takes 2 arguments : response and status
   
   Example
  ```typescript
    throw new HttpException("You couldn't mention an id ", 400);
  ```
- All the standars Exceptions are inherited from this class 
+ -> All the standard Exceptions are inherited from this class 
  
  ### Custom filters 
  
