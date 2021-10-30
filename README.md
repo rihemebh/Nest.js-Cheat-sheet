@@ -108,7 +108,7 @@ A route will identify the uri associated to an action.
 
 - It is an object that allows to define how the data is sent via the network.
 - DTOs are not the models, in many cases the model and data you wish to receive is different.
-- 
+
 |They can be defined using classes or interfaces, but Nest recommends using classes as TypeScript does not save metadata for generics and interfaces|
 |---|
 
@@ -200,7 +200,7 @@ A Middleware is quite simply a function called before the request is processed b
    - Call the next middleware function in the stack
    - if the current middleware function does not end the request-response cycle, it must call ``next()`` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
-  ------------------------------------------------
+
 To use middlewares: 
 1. AppModule should implement NestModule
 2.  Implement the ``configure`` method to specify which middleware to use in this app ana for which Route 
@@ -215,10 +215,14 @@ We could also restrict the use of middlewares to specific HTTP functions
 .forRoutes(
 {path: 'courses', method: RequestMethod.GET},
 );
+
+// forRoutes(...routes: (string | Type <any> | RouteInfo)[]): MiddlewareConsumer
   ``` 
 
-|``forRoutes(...routes: (string | Type <any> | RouteInfo)[]): MiddlewareConsumer``|
-|---|
+
+
+
+
 
  
 A Middleware could be a class or a function 
@@ -340,7 +344,7 @@ return response;
 }
   ```
  
-- To make this filter global for all requests by 
+- Make this filter global for all requests by 
 
  1. Adding it to the list of providers in the main module :
  ```typescript
@@ -350,7 +354,7 @@ return response;
     useClass: CustomFilter,
   } ],
  ```
-  2. Using ``useClobalFilters`` in our app of main.js
+  2. Using ``useGlobalFilters`` in our app of main.js
   ```typescript
   app.useGlobalFilters(new CustomFilter())
   ```
