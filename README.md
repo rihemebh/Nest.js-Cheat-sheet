@@ -23,6 +23,7 @@
   - [8.2 Pipes](#pipes)
   - [8.2 Interceptors](#interceptors)
 - [9. Filters](#filters)
+  - [9.1 Custom Filters](#custom-filters) 
 - [10. Configuration](#configuration-variables)
 - [11. ORM: Database Acess](#database-access)
 
