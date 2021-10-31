@@ -16,15 +16,15 @@
 - [5. DTO](#dto)
 - [6. Dependency Injection (DI)](#dependency-injection-di)
 - [7. Providers](#providers)
-  - [7.1 Injection types](#injection)
+  - [7.1 Injection types](#injection-)
   - [7.2 Services](#services)
 - [8. Request Lifecycle](#request-lifecycle)
-  - [8.1 Middlewares](#params)
+  - [8.1 Middlewares](#middlewares)
   - [8.2 Pipes](#pipes)
-  - [8.2 Filters](#filters)
   - [8.2 Interceptors](#interceptors)
-- [9. Configuration variables](#configuration-variables)
-- [10. ORM: Database Acess](#request-lifecycle)
+- [9. Filters](#filters)
+- [10. Configuration](#configuration-variables)
+- [11. ORM: Database Acess](#database-access)
 
 ## Let's Start
 
@@ -302,10 +302,10 @@ return value;
 ## Filters
  Filters are used to manage exceptions
  
-       NestJs comes with his pwn exception management layer that handles all the HTTP exceptions .
-       - If you don't handle the exception Nest does it for you 
+       NestJs comes with his own exception management layer that handles all the HTTP exceptions .
+       - If you don't handle the exception Nest will do it for you 
        - If an exception isn't recognized by this filter a default exception is triggered : the famous "Internal  server error" with the "500 status"
-  HttpException is calss given by nest to handle all the HTTP exceptions, its constructor takes 2 arguments : response and status
+  HttpException is a class given by Nest to handle all the HTTP exceptions, its constructor takes 2 arguments : response and status
   
   Example
  ```typescript
