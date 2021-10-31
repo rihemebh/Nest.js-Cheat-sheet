@@ -42,27 +42,27 @@
     
 ## Module
 
-- In Nest we use Modules which is an isolated part from the project that does certain role 
-- the default module of nest is the root module 
-- modules are annotated with ``@Module(parameters)``
+- A Modules is an isolated part from the project that does a certain role 
+- The default module of nest is the root module 
+- Modules are annotated with ``@Module(parameters)``
 
-### creation
+### Creation
 ```js
 nest g mo ModuleName
 ```
 
 ### Parameters
-- **Providers** les providers qui seront instanciés par l'injecteur Nest et qui peuvent être partagés au moins sur ce module.
-- **Controllers** l'ensemble des contrôleurs définis dans ce module
-- **Imports** la liste des modules importés qui exportent les providers requis dans ce module.
-- **Exports** Les providers fournis par ce module et qui peuvent être utilisés par d’autres modules
+- **Providers**: which will be instantiated by the Nest injector and which can be shared at least on this module.
+- **Controllers**:all the controllers defined in this module 
+- **Imports**: the list of imported modules which export the providers required in this module.
+- **Exports**: The providers provided by this module and which can be used by other modules
 
 
 ## Controllers 
 
 Controller is a class annotated with ``@Controller`` that contains a list of actions to accept the client's requests according to the route
 
-### creation
+### Creation
 ```js
 nest g co controllerName
 ```
@@ -271,11 +271,11 @@ We have 2 different types of pipes
 
 - **PartialType** : Returns the targeted class by setting all the fields to Optional.
 
-- **PickType** : allows you to create a new type (a class) by choosing one set of fields of an existing class.
+- **PickType** : Allows you to create a new type (a class) by choosing one set of fields of an existing class.
 
-- **OmitType** : allows you to create a new type (a class) by removing a set of fields of an existing class.
+- **OmitType** : Allows you to create a new type (a class) by removing a set of fields of an existing class.
 
-- **IntersectionType** :  allows you to create a new type (a class) fr designated fields that exist in two types.
+- **IntersectionType** :  Allows you to create a new type (a class) fr designated fields that exist in two types.
 
 #### Custom pipes
 We have some Built-in pipes exported from the ``@nestjs/common`` package but we can also create our own ones :
