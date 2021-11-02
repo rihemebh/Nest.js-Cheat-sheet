@@ -266,7 +266,7 @@ We have 2 different types of pipes
 |Explanation| Transform input data to the desired form (e.g., from string to integer)|Evaluate the input data and throw an exception if invalid  |
 |Installation| auto |``npm i --save class-validator class-transformer``|
 |Where ?|Add it to the property that we want to pipe (Body , Param , Query ...)|Annotate properties|
-|Activation|auto |Gloabally : ``app.useGlobalPipes(new ValidationPipe({transform: true, whitelist: true}))`` <br/> In a specific route: ``@UsePipes(PipeClass1, PipeClass2,…)``|
+|Activation|auto |Globally : ``app.useGlobalPipes(new ValidationPipe({transform: true, whitelist: true}))`` <br/> In a specific route: ``@UsePipes(PipeClass1, PipeClass2,…)``|
 |Example of use |1. with dependecy injection <br/> ``@Param('id', ParseIntPipe)`` <br/>2. with class instantiation ( where we could customize the error message ) <br/>``@Param('id', new ParseIntPipe({errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE})`` <br/>|1. specify the error message with a simple string : ``@MinLength(20, {message: "$property should has at least $constraint1 characters "})`` <br/> ``title: string;`` <br/>1. specify the error messages with a function :``@MinLength(20, {message: (validationData: ValidationArguments) => { return `the size of ${validationData.property} ${validationData.value} is too small, you should at least have  ${validationData.constraints[0]} characters `}`` |
 
 #### Mapped Type
