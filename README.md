@@ -310,17 +310,23 @@ Role:
 1. Context : execution context of the query (exp rest query )
 2. next : CallHandler is a method that has the method handle as param and return observable
 
-```typscript 
+```typescript 
 import {Injectable, NestInterceptor, ExecutionContext, CallHandler} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class MyFirstInterceptor implements NestInterceptor {
+
 intercept(context: ExecutionContext, next: CallHandler): Observable<any>
 {
-console.log('Before...');
-return next.handle().pipe(tap(() => console.log(`After...`)));
+ // code executed before the request 
+ 
+return next.handle().pipe(tap(() => 
+
+// code executed after the request 
+
+));
 }
 }
 ```
