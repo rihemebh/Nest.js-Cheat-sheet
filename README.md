@@ -299,7 +299,59 @@ return value;
 ```
  ------------------------------------------
 ### Interceptors 
-// to be added 
+Interceptors are classes annotated with ``@Injectable()`` and Implement the interface ``NestInterceptor``
+
+Role: 
+- Add additional logiqic before and after the method execution
+- Transform the response 
+- Transform the thrown exception 
+
+
+1. Context : execution context of the query (exp rest query )
+2. next : CallHandler is a method that has the method handle as param and return observable
+
+```typscript 
+import {Injectable, NestInterceptor, ExecutionContext, CallHandler} from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+@Injectable()
+export class MyFirstInterceptor implements NestInterceptor {
+intercept(context: ExecutionContext, next: CallHandler): Observable<any>
+{
+console.log('Before...');
+return next.handle().pipe(tap(() => console.log(`After...`)));
+}
+}
+```
+
+Interceptors has 3 scopes : 
+1. Routes 
+```typescript 
+@Get('')
+@UseInterceptors(RequestDurationInterceptor)
+getAllProducts() {
+return this.produitService.getAllProduits();
+}
+```
+2. Controller 
+```typescript 
+@UseInterceptors(RequestDurationInterceptor)
+@Controller('post')
+export class PostController {
+constructor(
+public service: PostService
+) {
+}
+```
+3. Global
+```typescript 
+app.useGlobalInterceptors(
+new ErrorHandlerInterceptor(),
+new RequestDurationInterceptor(),
+new TransformInterceptor(),
+new ExcludNullInterceptor() );
+```
 ## Filters
  Filters are used to manage exceptions
  
