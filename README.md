@@ -252,7 +252,9 @@ adapt.
   
   
 #### Global Middlewares 
-You can declare the middleware in the ``use(<middlewarename>)``  function of main.js
+
+   You can declare the middleware in the ``use(<middlewarename>)``  function of main.js
+   
  ------------------------------------------
 ### Pipes
 
@@ -301,7 +303,7 @@ return value;
 ### Interceptors 
 Interceptors are classes annotated with ``@Injectable()`` and Implement the interface ``NestInterceptor``
 
-Role: 
+**Role**: 
 - Add additional logiqic before and after the method execution
 - Transform the response 
 - Transform the thrown exception 
@@ -428,4 +430,8 @@ return response;
 
 
 ## Database Access 
-// to be added 
+
+
+### ORM 
+
+Reference : [Decorators](https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md)
