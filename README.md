@@ -21,11 +21,11 @@
 - [8. Request Lifecycle](#request-lifecycle)
   - [8.1 Middlewares](#middlewares)
   - [8.2 Pipes](#pipes)
-  - [8.2 Interceptors](#interceptors)
+  - [8.3 Interceptors](#interceptors)
+  - [8.4 Guards](#guards)
 - [9. Filters](#filters)
   - [9.1 Custom Filters](#custom-filters) 
-- [10. Configuration](#configuration-variables)
-- [11. ORM: Database Acess](#database-access)
+- [10. ORM: Database Acess](#database-access)
 
 ## Let's Start
 
@@ -425,13 +425,10 @@ return response;
          Prefer applying filters by using classes instead of instances when possible. 
          It reduces memory usage since Nest can easily reuse instances of the same class across your entire module.
   
-## Configuration Variables
-// to be added 
 
 
 ## Database Access 
-
-
 ### ORM 
+
 
 Reference : [Decorators](https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md)
